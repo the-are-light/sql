@@ -31,7 +31,6 @@ def create_users():
     from mimesis import Person, Gender
     from random import choice, randint
     op = ['T2', 'Beeline', 'MTS', 'Yota']
-    year_to_univer = '31.08.2024'
     ru_spec = RussiaSpecProvider()
     for _ in range(10):
         person = Person(Locale.RU)

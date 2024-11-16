@@ -35,7 +35,7 @@ def create_users():
     for _ in range(10):
         person = Person(Locale.RU)
         name, last_name, pat = person.first_name(Gender.MALE), person.last_name(Gender.MALE), ru_spec.patronymic(Gender.MALE)
-        data_birth = person.birthdate()
+        data_birth = person.birthdate(min_year=2004, max_year=2007)
         phone = person.phone_number()
         operator = choice(op)
         conn.execute("""
@@ -106,7 +106,7 @@ print(get_users_to_operator('Yota'))
 #b
 print(get_users_to_year())
 #c
-print(get_users_to_names(['Вавила', 'Влас']))
+print(get_users_to_names(['Климент', 'Ярослав']))
 #d
 print(get_users_to_bdate('05'))
 #e

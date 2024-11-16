@@ -43,7 +43,7 @@ def create_users():
         """, (name, last_name, pat, str(data_birth), choice([2024, 2023, 2022]), choice([2024, 2023]), phone, operator,))
         conn.execute("""
         INSERT INTO DIARY (last_name, math, dmath, prog, ncml) VALUES (?, ?, ?, ?, ?)
-        """, (last_name, randint(1, 10), randint(1, 10),randint(1, 10),randint(1, 10), ))
+        """, (last_name, randint(1, 30), randint(1, 30),randint(1, 30),randint(1, 30), ))
         conn.commit()
 
 def sort_last_name():
@@ -80,11 +80,11 @@ def get_users_to_year(yy=2024):
 
 def get_users_to_balls(ball=15):
     u = conn.execute(f"""
-    SELECT last_name FROM DIARY WHERE math + dmath + prog + ncml >= {ball};
+    SELECT last_name FROM DIARY WHERE math >= {ball} AND dmath >= {ball} AND prog >= {ball} AND ncml >= {ball};
     """).fetchall()
     return u
 
-def get_bad_users(ball=15):
+def get_bad_users(ball=23):
     u = [ item[0] for i, item in enumerate(conn.execute(f""" SELECT last_name FROM DIARY WHERE math + dmath + prog + ncml <= {ball}; """).fetchall())]
 
     users = conn.execute(f"""
@@ -106,13 +106,13 @@ print(get_users_to_operator('Yota'))
 #b
 print(get_users_to_year())
 #c
-print(get_users_to_names(['Климент', 'Ярослав']))
+print(get_users_to_names(['Анатолий', 'Мартын']))
 #d
 print(get_users_to_bdate('05'))
 #e
 print(get_users_to_balls())
 #f
-print(get_users_to_balls(25))
+print(get_users_to_balls(5))
 #g
 print(get_bad_users())
 #h
